@@ -1001,6 +1001,61 @@ h1, h2, h3 { font-family: "Archivo", sans-serif; }
   background: none;
   color: rgba(255,255,255,.6);
 }
+
+/* Editorial video tile: keeps the hero focused without exposing player chrome. */
+.hero__visual--video {
+  min-height: 0;
+  padding-bottom: 26px;
+}
+.hero__visual--video .hero-video__frame {
+  display: block;
+  height: clamp(480px, 43vw, 630px);
+  aspect-ratio: auto;
+  border: 0;
+  background: #111;
+  box-shadow: 22px 24px 0 var(--red), 0 26px 60px rgba(0,0,0,.55);
+}
+.hero__visual--video .hero-video__frame img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: saturate(.78) contrast(1.08);
+  transition: transform 500ms ease, filter 300ms ease;
+}
+.hero-video__shade { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,0,0,.08), rgba(0,0,0,.48)); }
+.hero-video__play {
+  position: absolute;
+  top: 50%; left: 50%;
+  display: grid;
+  width: 68px; height: 68px;
+  place-items: center;
+  border: 1px solid rgba(255,255,255,.82);
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 18px;
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+.hero-video__index {
+  position: absolute;
+  top: 18px; left: 18px;
+  color: var(--white);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+.hero-video__frame:hover img { transform: scale(1.035); filter: saturate(.92) contrast(1.04); }
+.hero-video__frame:hover .hero-video__play,
+.hero-video__frame:focus-visible .hero-video__play { background: var(--white); color: var(--black); transform: translate(-50%, -50%) scale(1.06); }
+.hero-video__frame:focus-visible { outline: 2px solid var(--white); outline-offset: 6px; }
+
+@media (max-width: 900px) {
+  .hero__visual--video { padding-bottom: 20px; }
+  .hero__visual--video .hero-video__frame { height: min(116vw, 560px); box-shadow: 14px 16px 0 var(--red), 0 22px 44px rgba(0,0,0,.42); }
+}
 .live-dot {
   width: 7px;
   height: 7px;
