@@ -73,3 +73,31 @@ Ahrefs records low or zero direct volume for many detailed buying questions, but
 - Connect the form to the CRM and record quote submission, phone, email and cost-calculator events in GA4.
 - Remove `noindex, nofollow` from the mock-up before production deployment.
 - Replace the GitHub Pages Open Graph URL and image with the final Cotewell production URLs.
+
+---
+
+## Revision — 27 Aug 2026
+
+### Navigation (aligned across all four mock-ups)
+Row 1 (utility): Brisbane · Sydney · Melbourne | Our story · Testimonials · Case studies · Learning centre · How can we help? · Free tape samples | phone · email
+Row 2 (primary): Floor coating · Line marking · Floor resurfacing · Tape & shapes · Projectors · Cost calculator | Cart · **Request a Quote** (primary CTA)
+
+- `Blog` renamed `Learning centre` → https://cotewell.com.au/learning-centre/
+- Added: How Can We Help?, Industrial Floor Resurfacing, Floor Coating Cost Calculator, Request a Quote
+- Removed: `Shop` and `All products` from the nav (Shop remains in breadcrumbs/footer, which matches the live IA)
+- `Case studies` moved to row 1, beside Testimonials
+- `Testimonials` / `Case studies` now point at /video-gallery/ (the live destination), not /#testimonials
+- Nav gaps tighten at 1220px and the primary row wraps to its own line below 1040px
+
+### Brand palette
+Single red: **#9B0020**. `--signal` (#E0002E) and `--signal-bright` (#FF1748) collapsed onto it; button hover darkens to #7D0019.
+
+### Copy audit vs live (27 Aug 2026)
+Removed two figures that appear nowhere on cotewell.com.au:
+- "2,000m² Grillex factory project" → the live testimonial states the year and the outcome, not an area. Grillex block now quotes the live wording verbatim.
+- "3 days / 1,600m² warehouse project" → replaced with the Grillex "2+ yrs reported maintenance savings" stat.
+
+Verified as supported and left in place:
+- 3-5 days to coat, 5-7 days before heavy traffic, 24-hour fast-cure, staged-by-zone option — all stated in `/how-much-downtime-can-your-workshop-afford-our-fast-curing-system/`
+- "repair the highest-wear areas rather than recoat the whole floor", the slip-vs-cleanability trade-off — `/a-workshop-floor-can-look-like-this-even-18-months-later/`
+- epoxy / polyurethane / polyaspartic / polyurea, staff wellbeing, dust reduction, chemical & abrasion resistance, light reflectivity, branding of areas — `/service/floor-coating-and-sealing/`
