@@ -103,4 +103,33 @@
       });
     });
   });
+  var heroVideo = document.querySelector('[data-hero-video]');
+  var heroToggle = document.querySelector('[data-hero-video-toggle]');
+  if (heroVideo && heroToggle) {
+    var toggleIcon = heroToggle.querySelector('[data-toggle-icon]');
+    heroToggle.addEventListener('click', function () {
+      heroVideo.muted = !heroVideo.muted;
+      if (toggleIcon) toggleIcon.textContent = heroVideo.muted ? '\uD83D\uDD07' : '\uD83D\uDD0A';
+      heroToggle.setAttribute('aria-label', heroVideo.muted ? 'Unmute video' : 'Mute video');
+      if (!heroVideo.muted && heroVideo.paused) heroVideo.play();
+    });
+
+    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) {
+      heroVideo.removeAttribute('autoplay');
+      heroVideo.pause();
+      heroVideo.setAttribute('controls', '');
+    } else if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            var playing = heroVideo.play();
+            if (playing && playing.catch) playing.catch(function () {});
+          } else {
+            heroVideo.pause();
+          }
+        });
+      }, { threshold: 0.2 }).observe(heroVideo);
+    }
+  }
 })();

@@ -35,6 +35,7 @@ jobs:
           test -f index.html
           test -f styles.css
           test -f app.js
+          test -f assets/video/bendpro-flooring-process.mp4
           test -d assets/img
           test -d assets/fonts
           ! grep -R "/Users/" index.html styles.css app.js
