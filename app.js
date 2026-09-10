@@ -133,3 +133,14 @@
     }
   }
 })();
+
+/* Keep a usable route to testimonials when the remote embed is unavailable. */
+document.querySelectorAll('video[aria-label="Cabinet Connections video testimonial"]').forEach(function(video) {
+  video.addEventListener('error', function() {
+    video.controls = false;
+    var message = document.createElement('p');
+    message.textContent = 'This video is currently unavailable here. Use See all testimonials below.';
+    message.style.cssText = 'padding:12px;margin:0;background:#000;color:#fff;font-size:14px';
+    video.parentNode.appendChild(message);
+  }, {once:true});
+});

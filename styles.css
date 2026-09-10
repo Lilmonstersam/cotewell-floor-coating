@@ -1169,3 +1169,14 @@ h1, h2, h3 { font-family: "Archivo", sans-serif; }
   .hero__actions { gap: 12px; }
   .hero__actions .button { width: 100%; justify-content: center; }
 }
+
+/* Client feedback: red interaction states and a lower hero eyebrow. */
+.hero__copy > .eyebrow { margin-top:28px; }
+.faq-list details[open] summary { color:var(--red); }
+.application:hover, .benefit:hover { background:var(--red); color:#fff; }
+.application:hover *, .benefit:hover * { color:#fff; }
+
+.benefit-card:nth-child(n) { --hover-colour:var(--red); }
+
+.quote-section h2, #insights h2 { overflow-wrap:anywhere; }
+.quote-grid > *, .section-head > * { min-width:0; }
