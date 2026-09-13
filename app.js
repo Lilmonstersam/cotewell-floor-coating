@@ -2,7 +2,9 @@
   var header = document.querySelector('[data-header]');
   var sectionNav = document.querySelector('[data-section-nav]');
   var sectionNavTrack = sectionNav ? sectionNav.querySelector('.section-nav__links') : null;
-  var sectionNavLinks = sectionNav ? Array.prototype.slice.call(sectionNav.querySelectorAll('a[href^="#"]')) : [];
+  var sectionNavLinks = sectionNav
+    ? Array.prototype.slice.call(sectionNav.querySelectorAll('a[href^="#"]'))
+    : [];
   var sectionTargets = sectionNavLinks.map(function (link) {
     return document.querySelector(link.getAttribute('href'));
   }).filter(Boolean);
@@ -12,21 +14,23 @@
   var lastY = 0;
   var ticking = false;
 
+  // ── Keep --site-header-height in sync with actual rendered height ──
   function updateHeaderHeight() {
     if (!header) return;
-    document.documentElement.style.setProperty('--site-header-height', header.offsetHeight + 'px');
+    document.documentElement.style.setProperty(
+      '--site-header-height', header.offsetHeight + 'px'
+    );
   }
 
+  // ── Highlight active section in section-nav ──
   function updateSectionNav() {
     if (!sectionTargets.length) return;
     var headerOffset = header ? header.offsetHeight : 0;
     var marker = headerOffset + (sectionNav ? sectionNav.offsetHeight : 0) + 32;
     var current = sectionTargets[0];
-
     sectionTargets.forEach(function (section) {
       if (section.getBoundingClientRect().top <= marker) current = section;
     });
-
     if (!current || current.id === activeSectionId) return;
     activeSectionId = current.id;
     sectionNavLinks.forEach(function (link) {
@@ -45,6 +49,7 @@
     });
   }
 
+  // ── Sticky CTA: show once hero has scrolled out ──
   function updateStickyCta() {
     if (!hero || !stickyCta) return;
     var show = hero.getBoundingClientRect().bottom <= 0;
@@ -52,11 +57,16 @@
     stickyCta.setAttribute('aria-hidden', String(!show));
   }
 
+  // ── Header scroll logic ──
+  // Hide when scrolling DOWN past 180px; show when scrolling UP.
+  // Add .is-compact (drop-shadow) past 80px.
   function updateHeader() {
     ticking = false;
     var y = window.scrollY || 0;
-    if (header) {
+    if (header && !document.body.classList.contains('menu-open')) {
       header.classList.toggle('is-hidden', y > lastY && y > 180);
+      var compact = header.classList.contains('is-compact');
+      header.classList.toggle('is-compact', compact ? y > 10 : y > 80);
     }
     updateStickyCta();
     updateSectionNav();
@@ -64,22 +74,22 @@
   }
 
   window.addEventListener('scroll', function () {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(updateHeader);
-    }
+    if (!ticking) { ticking = true; requestAnimationFrame(updateHeader); }
   }, { passive: true });
 
+  // Run once on load
   updateHeaderHeight();
   updateStickyCta();
   updateSectionNav();
 
+  // Keep height in sync on resize
   if ('ResizeObserver' in window && header) {
     new ResizeObserver(updateHeaderHeight).observe(header);
   } else {
     window.addEventListener('resize', updateHeaderHeight);
   }
 
+  // ── Scroll-reveal (IntersectionObserver) ──
   var revealItems = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
   if ('IntersectionObserver' in window) {
     var observer = new IntersectionObserver(function (entries) {
@@ -95,6 +105,7 @@
     revealItems.forEach(function (item) { item.classList.add('is-visible'); });
   }
 
+  // ── FAQ accordion: one open at a time ──
   document.querySelectorAll('.faq-list details').forEach(function (item) {
     item.addEventListener('toggle', function () {
       if (!item.open) return;
@@ -103,18 +114,21 @@
       });
     });
   });
+
+  // ── Hero video: mute toggle + pause when off-screen ──
   var heroVideo = document.querySelector('[data-hero-video]');
   var heroToggle = document.querySelector('[data-hero-video-toggle]');
   if (heroVideo && heroToggle) {
     var toggleIcon = heroToggle.querySelector('[data-toggle-icon]');
     heroToggle.addEventListener('click', function () {
       heroVideo.muted = !heroVideo.muted;
-      if (toggleIcon) toggleIcon.textContent = heroVideo.muted ? '\uD83D\uDD07' : '\uD83D\uDD0A';
+      if (toggleIcon) toggleIcon.textContent = heroVideo.muted ? '🔇' : '🔊';
       heroToggle.setAttribute('aria-label', heroVideo.muted ? 'Unmute video' : 'Mute video');
       if (!heroVideo.muted && heroVideo.paused) heroVideo.play();
     });
 
-    var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var reduceMotion = window.matchMedia &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduceMotion) {
       heroVideo.removeAttribute('autoplay');
       heroVideo.pause();
@@ -132,15 +146,43 @@
       }, { threshold: 0.2 }).observe(heroVideo);
     }
   }
-})();
 
-/* Keep a usable route to testimonials when the remote embed is unavailable. */
-document.querySelectorAll('video[aria-label="Cabinet Connections video testimonial"]').forEach(function(video) {
-  video.addEventListener('error', function() {
-    video.controls = false;
-    var message = document.createElement('p');
-    message.textContent = 'This video is currently unavailable here. Use See all testimonials below.';
-    message.style.cssText = 'padding:12px;margin:0;background:#000;color:#fff;font-size:14px';
-    video.parentNode.appendChild(message);
-  }, {once:true});
-});
+  // ── Mobile menu toggle ──
+  var menuButton = document.querySelector('.menu-toggle');
+  var primary    = document.querySelector('.primary');
+  if (menuButton && primary) {
+    menuButton.addEventListener('click', function () {
+      var open = primary.classList.toggle('is-open');
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.textContent = open ? 'Close' : 'Menu';
+      document.body.classList.toggle('menu-open', open);
+    });
+  }
+
+  // ── Learning Centre dropdown (keyboard toggle) ──
+  var learningButton = document.querySelector('.learning-menu > button');
+  if (learningButton) {
+    learningButton.addEventListener('click', function () {
+      var expanded = learningButton.getAttribute('aria-expanded') === 'true';
+      learningButton.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+    });
+  }
+
+  // ── Custom Video Play Buttons ──
+  var playButtons = document.querySelectorAll('.video-play-btn');
+  playButtons.forEach(function (btn) {
+    var video = btn.previousElementSibling;
+    if (video && video.tagName === 'VIDEO') {
+      btn.addEventListener('click', function () {
+        video.play();
+      });
+      video.addEventListener('play', function () {
+        btn.style.display = 'none';
+      });
+      video.addEventListener('pause', function () {
+        btn.style.display = 'flex';
+      });
+    }
+  });
+
+})();
