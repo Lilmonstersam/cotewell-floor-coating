@@ -1264,14 +1264,17 @@ h3 {
   display: grid;
   grid-template-columns: 44px 1fr;
   gap: 16px;
+  align-items: start;
   border-bottom: 1px solid var(--line-dark);
   padding: 18px 0;
 }
 
 .load-map li>span {
   color: var(--red);
-  font-family: "Open Sans";
-  font-size: 12px;
+  font-family: "Big John", sans-serif;
+  font-size: 20px;
+  line-height: 1;
+  margin-top: 2px;
 }
 
 .load-map strong {
