@@ -389,7 +389,7 @@ h3 {
   background: var(--red);
   color: var(--white);
   font-family: "Open Sans", sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
 }
 
@@ -585,21 +585,31 @@ h3 {
 }
 
 .hero__resources a {
+  min-height: 44px;
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  color: rgba(255, 255, 255, .78);
-  border-bottom: 1px solid rgba(255, 255, 255, .3);
-  padding-bottom: 3px;
-  font-size: 14px;
-  font-weight: 650;
-  transition: color 180ms ease, border-color 180ms ease;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid rgba(255, 255, 255, .42);
+  border-radius: 0;
+  /* corner-framed CTA, matching .button--outline */
+  padding: 11px 18px;
+  background: transparent;
+  color: var(--white);
+  font-family: "Big John", sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  transition: background 180ms ease, border-color 180ms ease, color 180ms ease, transform 180ms ease;
 }
 
 .hero__resources a:hover,
 .hero__resources a:focus-visible {
-  color: var(--white);
   border-color: var(--white);
+  background: var(--white);
+  color: var(--black);
+  transform: translateY(-2px);
 }
 
 .hero__resources a:focus-visible {
@@ -1232,7 +1242,7 @@ h3 {
 .fine-print {
   margin: 16px 0 0;
   color: rgba(255, 255, 255, .68);
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .longevity-grid {
@@ -1333,7 +1343,7 @@ h3 {
   align-items: center;
   min-height: 72px;
   color: var(--muted-light);
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.3;
 }
 
@@ -1494,13 +1504,19 @@ h3 {
 }
 
 .faq-list summary {
-  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 20px 0;
   cursor: pointer;
   list-style: none;
   padding: 24px 48px 24px 0;
   font-family: "Big John";
   font-size: 20px;
   font-weight: 700;
+  line-height: 1.25;
+  list-style: none;
 }
 
 .faq-list summary::-webkit-details-marker {
@@ -1517,15 +1533,20 @@ h3 {
 }
 
 .faq-list details[open] summary::after {
-  content: "−";
+  content: "–";
+}
+
+.faq-list details[open] summary {
+  color: var(--red);
 }
 
 .faq-list details p {
-  max-width: 76ch;
-  margin: 0;
-  padding: 0 54px 24px 0;
-  color: var(--muted-dark);
-  line-height: 1.65;
+  max-width: 78ch;
+  margin: 0 0 22px;
+  padding: 0;
+  color: rgba(0, 0, 0, .75);
+  font-size: 18px;
+  line-height: 1.6;
 }
 
 .site-quiz {
@@ -1587,7 +1608,7 @@ h3 {
 
 .site-quiz__preview>.mono {
   margin: 24px 0 16px;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 .site-quiz__options {
@@ -1666,7 +1687,7 @@ h3 {
   display: block;
   margin-bottom: 6px;
   color: var(--muted-dark);
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: .06em;
   text-transform: uppercase;
@@ -1698,7 +1719,7 @@ h3 {
 .form-note {
   margin: 0;
   color: var(--muted-dark);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .site-footer {
@@ -1709,7 +1730,7 @@ h3 {
 /* 5-column grid: brand + 4 link columns */
 .footer-grid {
   display: grid;
-  grid-template-columns: 5fr repeat(4, 1fr);
+  grid-template-columns: 1.7fr repeat(3, 1fr);
   gap: 50px;
 }
 
@@ -1785,7 +1806,7 @@ h3 {
   padding-top: 18px;
   color: rgba(255, 255, 255, .44);
   font-family: "Open Sans", sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   letter-spacing: .08em;
 }
 
@@ -2177,7 +2198,12 @@ h3 {
   }
 
   .faq-list summary {
-    font-size: 17px;
+    font-size: 16px;
+    gap: 16px;
+  }
+
+  .faq-list details p {
+    font-size: 16.5px;
   }
 
   .comparison-footer {
@@ -2222,7 +2248,7 @@ h3 {
   .header-cta {
     min-height: 40px;
     padding: 10px 15px;
-    font-size: 10.5px;
+    font-size: 12px;
   }
 
   .brand-logo {
@@ -2253,7 +2279,7 @@ h3 {
   .sticky-cta .button {
     min-height: 46px;
     padding: 9px 8px;
-    font-size: 9.5px;
+    font-size: 12px;
   }
 
   .hero__resources {
@@ -2305,7 +2331,7 @@ h3 {
   }
 
   .utility-nav {
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 
@@ -2758,7 +2784,7 @@ h3 {
   font-family: "Big John";
   text-transform: uppercase;
   letter-spacing: .04em;
-  font-size: 11px;
+  font-size: 12px;
 }
 
 @media (max-width: 980px) {
@@ -2811,9 +2837,6 @@ h3 {
   margin-top: 28px;
 }
 
-.faq-list details[open] summary {
-  color: var(--red);
-}
 
 .application:hover,
 .benefit:hover {
@@ -2860,7 +2883,7 @@ h3 {
   }
 
   .primary a {
-    font-size: 11px;
+    font-size: 12px;
   }
 }
 
@@ -2943,7 +2966,7 @@ h3 {
   .header-cta {
     min-height: 40px;
     padding: 10px 15px;
-    font-size: 10.5px;
+    font-size: 12px;
   }
 
   .brand-logo {
@@ -3005,6 +3028,6 @@ h3 {
   .sticky-cta .button {
     min-height: 46px;
     padding: 9px 8px;
-    font-size: 9.5px;
+    font-size: 12px;
   }
 }
