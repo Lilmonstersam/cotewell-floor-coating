@@ -554,8 +554,15 @@ h3 {
 
 .hero__actions {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   gap: 24px;
+}
+
+.hero__buttons {
+  display: flex;
+  align-items: center;
+  gap: inherit;
   flex-wrap: wrap;
 }
 
