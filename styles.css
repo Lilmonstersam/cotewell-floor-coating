@@ -2729,6 +2729,10 @@ h3 {
   font-size: 13px;
 }
 
+.proof-card__copy .button {
+  margin-top: auto;
+}
+
 /* Learning-centre cards, carried across from the projector page. */
 .project-grid {
   display: grid;
@@ -2741,6 +2745,8 @@ h3 {
 }
 
 .project-card {
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--line-light);
   background: #111315;
   transition: transform 190ms ease, border-color 190ms ease;
@@ -2778,6 +2784,9 @@ h3 {
 }
 
 .project-card__copy {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
   padding: 24px;
 }
 
@@ -2796,7 +2805,9 @@ h3 {
   letter-spacing: -.02em;
 }
 
-.project-card__copy .text-link {
+.project-card__copy .text-link,
+.project-card__copy .button {
+  margin-top: auto;
   color: rgba(255, 255, 255, .78);
   font-size: 13px;
 }
