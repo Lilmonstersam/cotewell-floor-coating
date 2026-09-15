@@ -449,6 +449,19 @@ h3 {
   color: var(--black);
 }
 
+/* Dark outline for light backgrounds */
+.button--outline-dark {
+  border: 1.5px solid var(--black);
+  background: transparent;
+  color: var(--black);
+}
+
+.button--outline-dark:hover,
+.button--outline-dark:focus-visible {
+  background: var(--black);
+  color: var(--white);
+}
+
 /* Large variant */
 .button--large {
   min-height: 54px;
@@ -830,7 +843,7 @@ h3 {
 
 .benefit-card h3 {
   max-width: 14ch;
-  margin: auto 0 18px;
+  margin: 72px 0 18px;
   font-size: clamp(27px, 2.5vw, 36px);
   line-height: .98;
   letter-spacing: -.035em;
@@ -841,7 +854,7 @@ h3 {
   max-width: 56ch;
   margin: 0;
   color: var(--muted-dark);
-  font-family: "Big John", sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 16px;
   letter-spacing: 0;
   line-height: 1.55;
@@ -942,7 +955,9 @@ h3 {
   gap: 28px;
   align-items: start;
   border-bottom: 1px solid var(--line-dark);
-  padding: 26px 0;
+  padding: 26px 32px;
+  margin: 0 -32px;
+  transition: background-color 260ms ease, color 260ms ease;
 }
 
 .application__number {
@@ -2155,6 +2170,8 @@ h3 {
   .application {
     grid-template-columns: 42px 1fr;
     gap: 15px;
+    padding: 26px var(--gutter);
+    margin: 0 calc(var(--gutter) * -1);
   }
 
   .system-media {
