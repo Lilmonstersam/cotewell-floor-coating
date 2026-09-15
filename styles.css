@@ -880,6 +880,16 @@ h3 {
   background: var(--red);
 }
 
+.section--red .eyebrow,
+.quote-section .eyebrow {
+  color: var(--white);
+}
+
+.section--red .eyebrow span,
+.quote-section .eyebrow span {
+  background: var(--white);
+}
+
 .section-head {
   display: grid;
   grid-template-columns: 1.15fr .85fr;
